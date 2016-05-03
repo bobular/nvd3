@@ -554,6 +554,7 @@ nv.models.tooltip = function() {
         ,   duration = 100 // Tooltip movement duration, in ms.
         ,   headerEnabled = true // If is to show the tooltip header.
         ,   nvPointerEventsClass = "nv-pointer-events-none" // CSS class to specify whether element should not have mouse events.
+        ,   applyClass = null
     ;
 
     /*
@@ -622,6 +623,7 @@ nv.models.tooltip = function() {
 
         trowEnter.append("td")
             .classed("key",true)
+            .classed(applyClass ? applyClass : 'key', true)
             .classed("total",function(p) { return !!p.total})
             .html(function(p, i) { return keyFormatter(p.key, i)});
 
@@ -825,6 +827,7 @@ nv.models.tooltip = function() {
         keyFormatter: {get: function(){return keyFormatter;}, set: function(_){keyFormatter=_;}},
         headerEnabled: {get: function(){return headerEnabled;}, set: function(_){headerEnabled=_;}},
         position: {get: function(){return position;}, set: function(_){position=_;}},
+        applyClass: {get: function(){return applyClass;}, set: function(_){applyClass=_;}},
 
         // Deprecated options
         fixedTop: {get: function(){return null;}, set: function(_){
@@ -6037,6 +6040,7 @@ nv.models.legend = function() {
         , expanded = false
         , dispatch = d3.dispatch('legendClick', 'legendDblclick', 'legendMouseover', 'legendMouseout', 'stateChange')
         , vers = 'classic' //Options are "classic" and "furious"
+        , applyClass = null
         ;
 
     function chart(selection) {
@@ -6103,7 +6107,7 @@ nv.models.legend = function() {
 
             seriesEnter.append('text')
                 .attr('text-anchor', 'start')
-                .attr('class','nv-legend-text')
+                .attr("class", "nv-legend-text " + (applyClass ? applyClass : ''))
                 .attr('dy', '.32em')
                 .attr('dx', '8');
 
@@ -6378,6 +6382,7 @@ nv.models.legend = function() {
         radioButtonMode:    {get: function(){return radioButtonMode;}, set: function(_){radioButtonMode=_;}},
         expanded:   {get: function(){return expanded;}, set: function(_){expanded=_;}},
         vers:   {get: function(){return vers;}, set: function(_){vers=_;}},
+        applyClass: {get: function(){return applyClass;}, set: function(_){applyClass=_;}},
 
         // options that require extra logic in the setter
         margin: {get: function(){return margin;}, set: function(_){
